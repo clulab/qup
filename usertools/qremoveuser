@@ -1,0 +1,2 @@
+#/bin/bash
+java -cp /usr/local/qup/qup.jar main.scala.qup.usertools.RemoveUser "$@"

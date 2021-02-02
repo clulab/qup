@@ -1,0 +1,24 @@
+#!/bin/bash
+### Job Name
+#PBS -N example_test_name
+### Project code
+#PBS -A example_project_name
+#PBS -l walltime=01:00:00
+#PBS -q queue_name
+### Merge output and error files
+#PBS -j oe
+#PBS -k eod
+### Request 10 CPUS for 10 threads
+#PBS -l select=1:cpucore=10:memory=2gb:gpu=0
+### Send email on abort, begin and end
+#PBS -m abe
+### Specify mail recipient
+#PBS -M email_address
+
+export TMPDIR=/glade/scratch/$USER/temp
+#mkdir -p $TMPDIR
+
+### Run the executable
+#mpiexec_mpt ./executable_name.exe
+echo "TEST!"
+

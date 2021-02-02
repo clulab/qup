@@ -1,0 +1,12 @@
+[Unit]
+Description = QUP Job Scheduler Service
+After network.target = qup.service
+
+[Service]
+Type = forking
+ExecStart = /usr/local/bin/qup.sh start
+ExecStop = /usr/local/bin/qup.sh stop
+ExecReload = /usr/local/bin/qup.sh reload
+
+[Install]
+WantedBy=multi-user.target

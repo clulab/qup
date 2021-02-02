@@ -1,0 +1,25 @@
+#!/bin/bash
+### Job Name
+#PBS -N mpi_job
+### Project code
+#PBS -A project_code
+#PBS -l walltime=01:00:00
+#PBS -q queue_name
+### Merge output and error files
+#PBS -j oe
+#PBS -k eod
+### Select 2 nodes with 36 CPUs each for a total of 72 MPI processes
+#PBS -l select=2:ncpus=36:mpiprocs=36
+### Request 10 CPUS for 10 threads
+#PBS -l select=1:ncpus=10:ompthreads=10
+### Send email on abort, begin and end
+#PBS -m abe
+### Specify mail recipient
+#PBS -M email_address
+
+export TMPDIR=/glade/scratch/$USER/temp
+mkdir -p $TMPDIR
+
+### Run the executable
+mpiexec_mpt ./executable_name.exe
+
