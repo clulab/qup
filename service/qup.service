@@ -6,7 +6,7 @@ After network.target = qup.service
 Type = forking
 ExecStart = /usr/local/bin/qup.sh start
 ExecStop = /usr/local/bin/qup.sh stop
-ExecReload = /usr/local/bin/qup.sh reload
+ExecReload = /usr/local/bin/qup.sh restart
 
 [Install]
 WantedBy=multi-user.target
