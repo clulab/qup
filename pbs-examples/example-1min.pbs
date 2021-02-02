@@ -1,0 +1,23 @@
+#!/bin/bash
+### Job Name
+#PBS -N example_test_name
+### Project code
+#PBS -A example_project_name
+### Maximum time this job can run before being killed (here, 1 day)
+#PBS -l walltime=01:00:00:00
+### Resource Request (must contain cpucore, memory, and gpu (even if requested amount is zero)
+#PBS -l cpucore=4:memory=2gb:gpu=2
+### Output Options (default is stdout_and_stderr)
+#PBS -l outputMode=stdout_and_stderr
+##PBS -l outputMode=no_output
+##PBS -l outputMode=stdout_only
+##PBS -l outputMode=stderr_only
+
+
+### Run the job
+printenv
+nvidia-smi
+
+# stress can be installed using sudo apt-get install stress
+stress --cpu 1 -t 60
+
