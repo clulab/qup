@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mkdir /var/log/if [ "$EUID" -ne 0 ]
+if [ "$EUID" -ne 0 ]
   then echo "Please run installation script as root"
   exit
 fi
@@ -16,7 +16,7 @@ mkdir -p /usr/local/bin/
 cp configuration.properties /etc/qup/
 
 # Copy main JAR
-cp out/artifacts/microjobscheduler_jar/microjobscheduler.jar /usr/local/qup/qup.jar
+cp out/artifacts/qup_jar/qup.jar /usr/local/qup/qup.jar
 
 # Copy user tools to accessible location
 chmod +x usertools/*
@@ -33,3 +33,18 @@ cp service/qup.service /etc/systemd/system/
 # User message
 echo "To start the qup service, use 'sudo systemctl start qup.service'"
 echo "To stop the qup service, use 'sudo systemctl stop qup.service'"
+echo ""
+echo "Getting started in 2 minutes:"
+echo ""
+echo "To run an example job:"
+echo "1. sudo systemctl start qup.service"
+echo "2. sudo qadduser <yourusername> 1"
+echo "3. sudo apt-get install stress"
+echo "4. qsub pbs-examples/example-1min.pbs"
+echo ""
+echo "See the job running using:"
+echo "5. qstat"
+echo ""
+echo "When the job is completed, view the output:"
+echo "6. cat job.1.stdout.txt"
+echo "7. cat job.1.stderr.txt"
