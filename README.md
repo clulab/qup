@@ -149,3 +149,37 @@ Statistics:
 - **qshowusers:** Show users with access to the Qup scheduler
 
 
+# PBS Scripts
+Jobs are submitted using **qsub**, and referencing a specific PBS script.  Qup supports a limited subset of PBS commands, as illustrated in the following example PBS file, which can be used as a template for running your jobs:
+```
+#!/bin/bash
+### Job Name
+#PBS -N example_test_name
+### Project code
+#PBS -A example_project_name
+### Maximum time this job can run before being killed (here, 1 day)
+#PBS -l walltime=01:00:00:00
+### Resource Request (must contain cpucore, memory, and gpu (even if requested amount is zero)
+#PBS -l cpucore=4:memory=2gb:gpu=2
+### Output Options (default is stdout_and_stderr)
+#PBS -l outputMode=stdout_and_stderr
+##PBS -l outputMode=no_output
+##PBS -l outputMode=stdout_only
+##PBS -l outputMode=stderr_only
+
+
+### Run your job here
+printenv
+nvidia-smi
+stress --cpu 1 -t 60
+```
+
+### Supported PBS commands
+- Job name (using #PBS -N <jobName))
+- Project name (using #PBS -A <projectName))
+- Wall time limit (using #PBS -l walltime=<DD:HH:MM:SS>).  If a job is still running past this time, it will be killed.
+- Output mode (using #PBS -l outputMode=<outputMode>).  Defines whether the stdout and stderr output of a job will be saved.  Defaults to saving both.  Possible values are (stdout_and_stderr, no_output, stdout_only, stderr_only).
+- Resource allocation request (using #PBS -l cpucore=4:memory=2gb:gpu=2).  cpucore in number of cores, memory in xGB, and GPUs in number of GPUs (e.g. 3 not 0,1,2). 
+
+Other commands (e.g. mailing when completed) are not currently supported. 
+
