@@ -60,7 +60,7 @@ class ProcessRunner(job:ScheduledJob, executor:SchedulerExecutor) extends Runnab
     RunscriptHelper.mkRunScript(runscriptFilename, job)
 
     // Step 1: Assemble process builder
-    val runScriptCmd = List[String]("runuser", "-l", "peter", "-c", "'" + runscriptFilename + "'")     // Works
+    val runScriptCmd = List[String]("runuser", "-l", job.username, "-c", "'" + runscriptFilename + "'")     // Works
     val pb = new ProcessBuilder()
     pb.command(runScriptCmd.asJava)
 
