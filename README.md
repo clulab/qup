@@ -1,11 +1,11 @@
 ![Qup logo](qup-logo.png)
 ---
-**Qup:** (queue-up) A single-node job scheduler with NVIDIA GPU support
+**Qup** (queue-up): A single-node job scheduler with NVIDIA GPU support
 ---
 
 # Introduction
 Qup is a simple, no-fuss single-node job scheduler daemon, similar to slurm, sun grid engine, or pbs.  The primary features are:
-- Out of the box, it schedules three core resources: CPU cores, memory, and GPU resources, using a simple FIFO scheduler.
+- Out of the box, it schedules three core resources: CPU cores, memory, and GPUs, using a simple FIFO scheduler with priority queueing.
 - It includes support for scheduling NVIDIA GPUs running CUDA (through the CUDA_VISIBLE_DEVICES environment parameter)
 - It's intended for single machines (i.e. your workstation, or your lab's server)
 - It's intended to be setup and running in under two minutes. 
