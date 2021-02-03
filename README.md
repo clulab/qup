@@ -183,3 +183,16 @@ stress --cpu 1 -t 60
 
 Other commands (e.g. mailing when completed) are not currently supported. 
 
+# Scheduler 
+TODO
+The scheduler is implemented as FIFO (first-in, first out) scheduler.
+
+# Future features
+
+The following features are partially implemented, to be completed in the future:
+- Scheduler: FIFO with backfilling
+- Scheduler: Pre-emptable jobs
+
+# Contact
+TODO
+
