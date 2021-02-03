@@ -80,7 +80,7 @@ class ServerAuthentication(filenameServerPassword:String = ServerAuthentication.
 
     // Step 3B: Set permissions on server filename
     try {
-      val p1 = Process("chmod 700 " + filenameServerPassword)
+      FileUtils.changePermissions(filenameServerPassword, "600")
     } catch {
       case e:Throwable => {
         println("ERROR Setting server password file permissions: " + e.toString)
@@ -119,8 +119,8 @@ class ServerAuthentication(filenameServerPassword:String = ServerAuthentication.
 
     // Step 4B: Set permissions on user filename
     try {
-      val p2a = Process("chown username " + pathPlusFilenameUser)
-      val p2b = Process("chmod 700 " + pathPlusFilenameUser)
+      FileUtils.changeOwner(pathPlusFilenameUser, username)
+      FileUtils.changePermissions(pathPlusFilenameUser, "600")
     } catch {
       case e:Throwable => {
         println("ERROR Setting user password file owner and permissions: " + e.toString)

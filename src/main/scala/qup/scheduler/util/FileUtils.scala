@@ -32,5 +32,11 @@ object FileUtils {
     return result
   }
 
+  // Change permissions
+  def changePermissions(filename:String, permissions:String):Int = {
+    val chmodCmd = "chmod " + permissions + " " + filename
+    val result = chmodCmd.!
+    return result
+  }
 
 }
