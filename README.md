@@ -175,10 +175,10 @@ stress --cpu 1 -t 60
 ```
 
 ### Supported PBS commands
-- Job name (using #PBS -N <jobName))
-- Project name (using #PBS -A <projectName))
-- Wall time limit (using #PBS -l walltime=<DD:HH:MM:SS>).  If a job is still running past this time, it will be killed.
-- Output mode (using #PBS -l outputMode=<outputMode>).  Defines whether the stdout and stderr output of a job will be saved.  Defaults to saving both.  Possible values are (stdout_and_stderr, no_output, stdout_only, stderr_only).
+- Job name (using #PBS -N &lt;jobName>))
+- Project name (using #PBS -A &lt;projectName>))
+- Wall time limit (using #PBS -l walltime=&lt;DD:HH:MM:SS>).  If a job is still running past this time, it will be killed.
+- Output mode (using #PBS -l outputMode=&lt;outputMode>).  Defines whether the stdout and stderr output of a job will be saved.  Defaults to saving both.  Possible values are (stdout_and_stderr, no_output, stdout_only, stderr_only).
 - Resource allocation request (using #PBS -l cpucore=4:memory=2gb:gpu=2).  cpucore in number of cores, memory in xGB, and GPUs in number of GPUs (e.g. 3 not 0,1,2). 
 
 Other commands (e.g. mailing when completed) are not currently supported. 
@@ -194,7 +194,7 @@ A: Write a PBS run script (use the template above for a quick start), and submit
 
 **Q: Where does the console output of the job go?**
 
-A: The output (stdout, stderr) is redirected to files using the filename "job.<jobid>.stdout/stderr.txt".  They are placed in the directory that the qsub job was submitted from.  The location of these logs can be shown using **qinfo <jobid>**.  Logs can be turned off (or enabled only for stdout or stderr) using the *outputMode* setting in the PBS script.  4 modes are supported (stdout_and_stderr (default), no_output, stdout_only, stderr_only).  See the example PBS script for example usage. 
+A: The output (stdout, stderr) is redirected to files using the filename "job.&lt;jobid>.stdout/stderr.txt".  They are placed in the directory that the qsub job was submitted from.  The location of these logs can be shown using **qinfo &lt;jobid>**.  Logs can be turned off (or enabled only for stdout or stderr) using the *outputMode* setting in the PBS script.  4 modes are supported (stdout_and_stderr (default), no_output, stdout_only, stderr_only).  See the example PBS script for example usage. 
 
 **Q: How can I see how busy the system currently is?**
 
