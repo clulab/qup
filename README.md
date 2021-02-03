@@ -16,10 +16,10 @@ Qup is written in Scala 2.11 and requires Java 1.8+.  It has been tested on Ubun
 # Why another job scheduler?
 Using a job scheduler allows you to queue up a long list of jobs to run as the resources come available, either on your own workstation, or your lab's server.  The cannonical way of doing this is just for you to run your jobs manually, wait until they're finished, notice this, and then submit your next set of jobs.  This is very slow, causes lots of unused cycles, and (in multi-user settings) can cause jobs to consume more than the available resources.  For students, scientists, etc., a better way has typically been to install a job scheduler on your machine, queue it up with your jobs, let them run automatically as the resources come available.  
 
-Slurm, Sun Grid Engine (SGE), and PBS are existing job schedulers that scale to large high-performance clusters.  Some of them (and their open source counterparts) are becoming infrequently maintained, making installation on modern Ubuntu distributions difficult.  Slurm is actively maintained, but can be challenging to install (and, is primarily intended for large HPCs).  Qup offers a simple single-system alternative, with similar looking tools and scripts (e.g. qsub, qstat, qdel, etc).
+Slurm, Sun Grid Engine (SGE), and PBS are existing job schedulers that scale to large high-performance clusters.  Some of them (and their open source counterparts) are becoming infrequently maintained, making installation on modern Ubuntu distributions difficult.  Slurm is actively maintained, but can be challenging to install (and, is primarily intended for large HPCs).  Qup offers a simple single-system alternative, with similar looking tools and scripts (e.g. *qsub, qstat, qdel, etc*).
 
 # Installation
-Assuming Java 1.8+ is installed on your Ubuntu distribution, installation is fast, taking only a few moments.  Note that you should not install Qup if you already have slurm, SGE, or PBS installed, as it may overwrite some of your commands (qsub, qstat, qdel, etc): 
+Assuming Java 1.8+ is installed on your Ubuntu distribution, installation is fast, taking only a few moments.  Note that you should not install Qup if you already have slurm, SGE, or PBS installed, as it may overwrite some of your commands (*qsub, qstat, qdel, etc*): 
 
 Clone the repository:
 ```
@@ -41,12 +41,12 @@ sudo systemctl start qup.service
 
 The distribution includes a sample PBS script that runs *stress* (a high-CPU load stress tester) for 1 minute.  Here's how to submit it:
 
-First, add yourself as a user:
+First, add yourself as an administrative user:
 ```
 sudo qadduser <yourusername> 1
 ```
 
-Also, install *stress*:
+Also, install *stress*, for the sample stress-test job:
 ```
 sudo apt-get install stress
 ```
@@ -103,6 +103,49 @@ cat job.1.stdout.txt
 cat job.1.stderr.txt
 ```
 
+# Qup Server Configuration
+The Qup configuration file is located at */etc/qup/configuration.properties*. 
 
+### Configuring Resources
+Most users will need only modify the *resources* section to match the number of cpu cores, memory, and GPUs available on their system.  The default configuration has 32 cores, 500GB of RAM, and four NVIDIA GPU devices (0, 1, 2, 3):
+
+```
+#
+#   Resources
+#
+
+# Maximum number of CPU cores available
+resource.continuous.cpucore = 32
+
+# Maximum amount of memory available (in gigabytes)
+resource.continuous.memory = 500
+
+# Names of GPUs available (from NVIDIA-SMI)
+resource.discrete.gpu = 0, 1, 2, 3
+
+# If enabled (true), randomly (rather than sequentially) assigns discrete resources (like GPUs)
+resource.shuffleDiscreteResources = false
+```
+
+Note that GPUs must be enumerated using the same names that will be used for setting the *CUDA_VISIBLE_DEVICES* environment variable.  Typically this is 0, 1, 2, ... . 
+
+### Other Configuration
+The configuration file contains a number of other options that are unlikely to be required by most users (server port, modifying standard paths, etc).
+
+
+# User Commands and Tools
+Administrative (run as root):
+1. **qadduser:** Add a user to the Qup scheduler
+2. **qremoveuser:** Remove a user's access to the Qup scheduler
+
+Job Scheduling:
+4. **qsub:** Submit a job
+5. **qdel:** Delete a job (whether queued or currently running)
+6. **qinfo:** Show detailed information about a job
+7. **qstat:** Show all currently queued, running, and recently completed jobs
+
+Statistics:
+8. **qusage:** Show usage statistics for all users
+9. **qshowusers:** Show users with access to the Qup scheduler
 
 
