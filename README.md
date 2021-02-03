@@ -4,14 +4,14 @@
 ---
 
 # Introduction
-Qup is a simple, no-fuss single-node job scheduler, similar to slurm, sun grid engine, or pbs.  The primary features are:
-- Out of the box, it keeps track of available CPU cores, memory, and GPU resources using a simple FIFO scheduler.
-- It includes support for scheduling NVIDIA GPUs running CUDA (throught the CUDA_VISIBLE_DEVICES environment parameter)
+Qup is a simple, no-fuss single-node job scheduler daemon, similar to slurm, sun grid engine, or pbs.  The primary features are:
+- Out of the box, it schedules three core resources: CPU cores, memory, and GPU resources, using a simple FIFO scheduler.
+- It includes support for scheduling NVIDIA GPUs running CUDA (through the CUDA_VISIBLE_DEVICES environment parameter)
 - It's intended for single machines (i.e. your workstation, or your lab's server)
 - It's intended to be setup and running in under two minutes. 
 - It can parse a stripped-down subset of PBS scripts, making it somewhat compatible with slurm, SGE, or PBS.
 
-Qup is written in Scala 2.11 and requires Java 1.8+.  It has been tested on Ubuntu 20.04 LTS, and is intended for Ubuntu (or systemd-based) installations.
+Qup is written in Scala 2.11 and requires Java 1.8+.  It has been tested on Ubuntu 20.04 LTS, and is intended to run as a service on Ubuntu (or systemd-based) installations.
 
 ### Why use a job scheduler?
 ![why-scheduler](why-scheduler.png)
@@ -249,3 +249,17 @@ A: No, given that the jobs are not run in a VM, and the user has direct access t
 # Contact
 Qup was written by Peter Jansen (pajansen@email.arizona.edu).  For questions, issues, bug reports, or feature requests, please start a github issue. 
 
+# License
+Copyright 2020 Peter Jansen
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
