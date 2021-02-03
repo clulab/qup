@@ -189,43 +189,56 @@ The scheduler is implemented as FIFO (first-in, first out) scheduler with priori
 
 # Frequently Asked Questions (FAQ)
 **Q: How do I submit jobs?**
+
 A: Write a PBS run script (use the template above for a quick start), and submit it using **qsub**.  It will automatically execute in the next available spot.  Use **qstat** or **qinfo** to monitor it's progress. 
 
 **Q: Where does the console output of the job go?**
+
 A: The output (stdout, stderr) is redirected to files using the filename "job.<jobid>.stdout/stderr.txt".  They are placed in the directory that the qsub job was submitted from.  The location of these logs can be shown using **qinfo <jobid>**.  Logs can be turned off (or enabled only for stdout or stderr) using the *outputMode* setting in the PBS script.  4 modes are supported (stdout_and_stderr (default), no_output, stdout_only, stderr_only).  See the example PBS script for example usage. 
 
 **Q: How can I see how busy the system currently is?**
+
 A: **qstat** displays the proportion of resources (cpucores, memory, gpus) currently allocated at the top, as well as the number of queued and running jobs.
 
 **Q: How can I see usage statistics for the users/machine?**
+
 A: High-level usage statistics for all users (number of jobs submitted, resource hours requested, etc) can be shown using **qusage**. 
 
 **Q: Using qsub returns an authentication error?**
+
 A: Each user must be added to Qup by someone with sudo access, using the **qadduser** command, before they can submit to the queue.  A list of all authenticated users for qup is available using **qshowusers**. 
 
 **Q: Using any of the user tools (qsub, etc) gives a connection error?**
+
 A: Check that the qup service is running through systemd:
 `sudo systemctl status qup.service`
 
 **Q: How does authentication work between the user and Qup?**
+
 A: When a user is added, a password key is randomly generated.  A copy is stored in the user's home directory (with read permissions only for that user), and in the qup server directory (with read permissions only for root).  When specific requests are made (e.g. qsub, qdel), the user sends their password in the request packet, and it's verified by the server before completing the request.
 
 **Q: Is there a log file for server usage/errors?**
+
 A: Typically in */var/log/qup/outputLog.txt*.  This is set in qup.sh .
 
 **Q: Do jobs run in a virtual machine, container, or other box?**
+
 A: No.  If you want to run in a VM, container, or other box, you will need to do this in the runscript.  As is typical in non-VM schedulers, this means jobs must be well-behaved -- a job that requests 2 CPU cores could use 10, so it's up to the user to be accurate in their requests or jobs can conflict.  When in doubt, it's generally best to err on the side of caution and over request.
 
 **Q: How do GPU requests work with CUDA?**
+
 A: The cannonical way for CUDA jobs to run concurrently without conflict is for each job to check the *CUDA_VISIBLE_DEVICES* environment variable, and only use the GPUs enumerated in this variable.  Qup sets this environment variable for any devices that request GPU resources (and, empties it for jobs that do not request GPUs).  If a given piece of software does not check or respect *CUDA_VISIBLE_DEVICES*, then you should request all GPU resources on the machine to avoid conflicts.  For example, if a job requires 1 GPU on a 4 GPU machine, but the software does not respect *CUDA_VISIBLE_DEVICES* and decides on it's own which GPU to use, then that job is not well behaved.  It can still be run safely by requesting all 4 GPUs on the machine, to ensure no other GPU jobs run along side it.
 
 **Q: Does the scheduler support backfilling?**
+
 A: Time hints for backfilling are partially implemented in the storage classes, but it hasn't been implemented in the scheduler yet. 
 
 **Q: Does the scheduler support preemtable jobs?**
+
 A: Pre-emptable (background) jobs are partially implemented in the storage classes, but haven't been implemented in the scheduler yet.
 
 **Q: Does qup support interactive jobs?**
+
 A: No, given that the jobs are not run in a VM, and the user has direct access to the machine, interactive job support is not implemented.
 
 # Contact
