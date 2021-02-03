@@ -130,22 +130,22 @@ resource.shuffleDiscreteResources = false
 Note that GPUs must be enumerated using the same names that will be used for setting the *CUDA_VISIBLE_DEVICES* environment variable.  Typically this is 0, 1, 2, ... . 
 
 ### Other Configuration
-The configuration file contains a number of other options that are unlikely to be required by most users (server port, modifying standard paths, etc).
+The configuration file contains a number of other options that are unlikely to be required by most users (server port, modifying standard paths, etc).  HPCs typically isolate worker nodes behind a private network -- you may also wish to close the qup server port (default 9000) to outside traffic by modifying your firewall settings. 
 
 
 # User Commands and Tools
 Administrative (run as root):
-1. **qadduser:** Add a user to the Qup scheduler
-2. **qremoveuser:** Remove a user's access to the Qup scheduler
+- **qadduser:** Add a user to the Qup scheduler
+- **qremoveuser:** Remove a user's access to the Qup scheduler
 
 Job Scheduling:
-4. **qsub:** Submit a job
-5. **qdel:** Delete a job (whether queued or currently running)
-6. **qinfo:** Show detailed information about a job
-7. **qstat:** Show all currently queued, running, and recently completed jobs
+- **qsub:** Submit a job
+- **qdel:** Delete a job (whether queued, or kill a currently running job)
+- **qinfo:** Show detailed information about a job
+- **qstat:** Show all currently queued, running, and recently completed jobs
 
 Statistics:
-8. **qusage:** Show usage statistics for all users
-9. **qshowusers:** Show users with access to the Qup scheduler
+- **qusage:** Show usage statistics for all users
+- **qshowusers:** Show users with access to the Qup scheduler
 
 
