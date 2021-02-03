@@ -16,7 +16,9 @@ Qup is written in Scala 2.11 and requires Java 1.8+.  It has been tested on Ubun
 ### Why use a job scheduler?
 ![why-scheduler](why-scheduler.png)
 
-Using a job scheduler allows you to queue up a long list of jobs to run as the resources (cpucores, memory, gpus) come available, either on your own workstation, or your lab's server.  The cannonical way of doing this is just for you to run your jobs manually, wait until they're finished, notice this, and then submit your next set of jobs.  This is very slow, causes lots of unused cycles between when a job finishes and you submit your next job, and (in multi-user settings) can cause jobs to consume more than the available resources.  A better way has typically been to install a job scheduler on your machine, queue it up with your jobs, let them run automatically as the resources come available.  
+A typical way of running many jobs is to run each one manually, wait until they're finished, notice this, and then run the next job in the sequence.  This is very slow, causes lots of unused cycles between when a job finishes and when you run your next job, and (in multi-user settings) can cause jobs to conflict if they consume more than the available resources.
+
+A better way is to use a job scheduler, which allows you to queue up a long list of jobs to run as the resources (cpucores, memory, gpus) come available, either on your own workstation, or your lab's server.
 
 ### Why another job scheduler?
 Slurm, Sun Grid Engine (SGE), and PBS are existing job schedulers that scale to large high-performance clusters.  Some of them (and their open source counterparts) are becoming infrequently maintained, making installation on modern Ubuntu distributions difficult.  Slurm is actively maintained, but can be challenging to install (and, is primarily intended for large HPCs).  Qup offers a simple single-system alternative, with similar looking tools and scripts (e.g. *qsub, qstat, qdel, etc*).
