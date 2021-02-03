@@ -15,6 +15,7 @@ Qup is written in Scala 2.11 and requires Java 1.8+.  It has been tested on Ubun
 
 ### Why use a job scheduler?
 ![why-scheduler](why-scheduler.png)
+
 Using a job scheduler allows you to queue up a long list of jobs to run as the resources (cpucores, memory, gpus) come available, either on your own workstation, or your lab's server.  The cannonical way of doing this is just for you to run your jobs manually, wait until they're finished, notice this, and then submit your next set of jobs.  This is very slow, causes lots of unused cycles between when a job finishes and you submit your next job, and (in multi-user settings) can cause jobs to consume more than the available resources.  A better way has typically been to install a job scheduler on your machine, queue it up with your jobs, let them run automatically as the resources come available.  
 
 ### Why another job scheduler?
