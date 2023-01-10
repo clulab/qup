@@ -2,7 +2,6 @@ package main.scala.qup.scheduler
 
 import java.util.Properties
 
-import com.sun.deploy.util.StringUtils
 import main.scala.qup.struct.{NodeResource, ResourceCounter, ResourceDiscrete, ResourceDiscreteCounter}
 import main.scala.qup.util.PropertiesParser
 

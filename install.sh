@@ -16,7 +16,7 @@ mkdir -p /usr/local/bin/
 cp configuration.properties /etc/qup/
 
 # Copy main JAR
-cp out/artifacts/qup_jar/qup.jar /usr/local/qup/qup.jar
+cp qup.jar /usr/local/qup/qup.jar
 
 # Copy user tools to accessible location
 chmod +x usertools/*

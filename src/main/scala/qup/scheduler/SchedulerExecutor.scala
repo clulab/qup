@@ -180,17 +180,17 @@ class SchedulerExecutor(resourcesAvailable:ResourceStore) extends Runnable {
   private def findJob(jobID:String):Option[ScheduledJob] = {
     // Step 1: Search queue
     if (jobQueue.filter(_.id == jobID).length != 0) {
-      return Some( jobQueue.filter(_.id != jobID)(0) )
+      return Some( jobQueue.filter(_.id == jobID)(0) )
     }
 
     // Step 2: Search running jobs
     if (runningJobs.filter(_.id == jobID).length != 0) {
-      return Some( runningJobs.filter(_.id != jobID)(0) )
+      return Some( runningJobs.filter(_.id == jobID)(0) )
     }
 
     // Step 3: Search completed list
     if (completedJobs.filter(_.id == jobID).length != 0) {
-      return Some( completedJobs.filter(_.id != jobID)(0) )
+      return Some( completedJobs.filter(_.id == jobID)(0) )
     }
 
     // Not found
