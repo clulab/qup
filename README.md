@@ -249,6 +249,11 @@ A: No, given that the jobs are not run in a VM, and the user has direct access t
 # Contact
 Qup was written by Peter Jansen (pajansen@email.arizona.edu).  For questions, issues, bug reports, or feature requests, please start a github issue. 
 
+# Change Log
+- **1.0.0 (Feb 2021):** Initial Release.
+- **1.0.1 (Jan 2023):** Fixed bug in deleting jobs.
+
+
 # License
 Copyright 2020 Peter Jansen
 
